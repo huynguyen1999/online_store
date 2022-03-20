@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="favicon.ico;base64">
+  <title>Online shop</title>
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  {{{_sections.css}}}
+</head>
+
+<body>
+  {{> nav}}
+
+  <div class="container-fluid mt-4">
+    <div class="row">
+      <div class="col-sm-3">
+        <div class="card mb-3">
+          <h5 class="card-header">Featured</h5>
+          <div class="list-group list-group-flush">
+            {{#each categories as |category|}}
+            <a href="/products/byCat/{{category.CatID}}"
+             class="list-group-item list-group-item-action {{#if isActive}}active{{/if}}">
+              {{category.CatName}}
+               {{#if category.ProductCount}}
+              <span class="badge bg-danger float-end">{{category.ProductCount}}</span>
+              {{/if}}
+            </a>
+           
+            {{/each}}
+          </div>
+        </div>
+        
+      </div>
+      <div class="col-sm-9">
+        {{{body}}}
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"></script>
+   {{{_sections.js}}}
+</body>
+
+</html>

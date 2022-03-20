@@ -1,0 +1,72 @@
+{{#section "js"}}
+  <script>
+    $('.removeItem').on('click', function () { const id = $(this).data('id');
+    $('#txtProId').val(id); $('#frmRemoveItem').submit(); });
+  </script>
+{{/section}}
+
+<div class="card .cart">
+  <h5 class="card-header">
+    Your Cart
+  </h5>
+  {{#if this.empty}}
+    <div class="card-body">
+      <p class="card-text">Không có dữ liệu.</p>
+    </div>
+  {{else}}
+    <div class="card-body" id="cart_table">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Product</th>
+            <th scope="col">Price</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Amount</th>
+            <th scope="col">&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each this.items}}
+            <tr id="cart_product{{id}}" class=".cart_product">
+              <td>
+                <a href="/products/detail/{{id}}">{{product.ProName}}</a>
+              </td>
+              <td>{{format product.Price}}</td>
+              <td>{{quantity}}</td>
+              <td>{{format amount}}</td>
+              <td class="text-right">
+                <a
+                  data-id="{{id}}"
+                  class="btn btn-sm btn-outline-danger removeItem"
+                  href="javascript:$.post('/cart/remove', {id: {{id}} } )
+                  .done(function(data){
+                    location.reload();
+                  });"
+                  role="button"
+                  title="Remove Item"
+                >
+                  <i class="fa fa-trash" aria-hidden="true"></i>
+                </a>
+              </td>
+            </tr>
+          {{/each}}
+        </tbody>
+        <tfoot>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>Total: {{format this.total}}</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tfoot>
+      </table>
+    </div>
+  {{/if}}
+  <div class="card-footer text-muted">
+    <form action="/cart/checkout" method="POST">
+      <button type="submit" class="btn btn-outline-success float-right">
+        <i class="fa fa-check" aria-hidden="true"></i>
+        Check Out
+      </button>
+    </form>
+  </div>
+</div>

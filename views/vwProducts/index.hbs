@@ -1,0 +1,45 @@
+<div class="card">
+  <div class="card-header">
+    Products
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#if this.empty}}
+        <tr>
+          <th>No data</h1>
+        </tr>
+      {{else}}
+        {{#each this.products}}
+          <tr>
+            <th scope="row">{{ProID}}</th>
+            <td>{{ProName}}</td>
+            <td>{{TinyDes}}</td>
+            <td class="text-right">
+              <a
+                name=""
+                id=""
+                class="btn btn-sm btn-primary"
+                href="javascript:;"
+                role="button"
+                title="Edit"
+              >
+                <i class="fa fa-pencil" aria-hidden="true"></i>
+              </a></td>
+          </tr>
+        {{/each}}
+
+      {{/if}}
+
+    </tbody>
+  </table>
+  <div class="card-footer text-muted">
+    Footer
+  </div>
+</div>

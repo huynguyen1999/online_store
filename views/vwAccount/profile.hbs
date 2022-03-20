@@ -1,0 +1,16 @@
+<div class="card">
+  <h5 class="card-header">Profile</h5>
+  {{#with authUser}}
+    <div class="card-body">
+      <p class="card-text mt-3">Username: {{f_Username}} </p>
+      <p class="card-text">Email: {{f_Email}}</p>
+      <p class="card-text">Name: {{f_Name}}</p>
+      <p class="card-text">DOB: {{f_DOB}} </p>
+      <p class="card-text">Role:
+        {{#equal f_Permission 0}}Normal user {{/equal}}
+        {{#equal f_Permission 1}}Fucking admin {{/equal}}
+      </p>
+
+    </div>
+  {{/with}}
+</div>

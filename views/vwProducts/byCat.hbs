@@ -1,0 +1,89 @@
+<div class="card">
+  <div class="card-header">
+    <div class="card-text">{{this.category.CatName}}</div>
+  </div>
+  <div class="card-body">
+
+    <div class="row">
+      {{#if this.empty}}
+        <div class="card-body">
+          <p class="card-text">No products</p>
+        </div>
+      {{else}}
+        {{#each this.products}}
+          <div class="col-sm-4 mb-3">
+            <div class="card h-100" style="width: 18rem;">
+              <img
+                src="/imgs/sp/{{ProID}}/main_thumbs.jpg"
+                class="card-img-top"
+                alt="{{ProName}}"
+                title="{{ProName}}"
+              />
+              <div class="card-body">
+                <h5 class="card-title">{{ProName}}</h5>
+                <h5 class="card-title text-danger">{{format Price}}</h5>
+                <p class="card-text">{{TinyDes}}</p>
+              </div>
+
+              <div class="card-body">
+                <a href="/products/detail/{{ProID}}" class="btn btn-sm btn-outline-primary">
+                <i class="fa fa-eye" aria-hidden="true"></i>
+                Details
+                </a>
+                {{#if ../isAuth}}
+                <a 
+                  href="javascript:$.post('/cart/add', {id: {{ProID}}, quantity:1 })
+                  .done(function(data){location.reload();});" 
+                  class="btn btn-sm btn-outline-success">
+                <i class="fa fa-eye" aria-hidden="true"></i>
+                Add to cart
+                </a>
+                {{/if}}
+              </div>
+            </div>
+          </div>
+        {{/each}}
+      {{/if}}
+    </div>
+
+  </div>
+  {{#unless this.empty}}
+  <nav aria-label="Page navigation example">
+    <ul class="pagination d-flex justify-content-center">
+      {{#not_equal this.current_page 1}}
+      <li class="page-item">
+        <a class="page-link" href="?page=1" aria-disabled="true">
+          <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+        </a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="?page={{decrement ../this.current_page}}" aria-disabled="true">
+          <i class="fa fa-angle-left" aria-hidden="true"></i>
+        </a>
+      </li>
+      {{/not_equal}}
+     
+      {{#each this.page_items as |page_item|}}
+        {{!-- <li class="page-item {{#if page_item.isActive}}active{{/if}}">
+        <a href="#" class="page-link">{{page_item.item}}</a>
+        </li> --}}
+        <li class="page-item {{#equal page_item.item ../current_page}}active{{/equal}}">
+        <a href="?page={{page_item.item}}" class="page-link">{{page_item.item}}</a>
+        </li>
+      {{/each}}
+      {{#not_equal this.current_page this.n_pages}}
+      <li class="page-item">
+        <a class="page-link" href="?page={{increment ../this.current_page}}" aria-disabled="true">
+          <i class="fa fa-angle-right" aria-hidden="true"></i>
+        </a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="?page={{../this.n_pages}}" aria-disabled="true">
+          <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+        </a>
+      </li>
+      {{/not_equal}}
+    </ul>
+  </nav>
+ {{/unless}}
+</div>

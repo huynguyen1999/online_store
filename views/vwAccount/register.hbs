@@ -1,0 +1,66 @@
+{{#section "css"}}
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css"
+  />
+{{/section}}
+
+{{#section "js"}}
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"
+  ></script>
+  <script src="/scripts/validate.js"></script>
+{{/section}}
+<div class="card">
+  <div class="card-header">
+    Register
+  </div>
+  <div class="card-body">
+    <form action="" method="POST" id="formRegister" autocomplete="off">
+      <div class="form-group">
+        <label for="txtUsername">Username</label>
+        <input
+          type="text"
+          name="username"
+          id="txtUsername"
+          class="form-control"
+        />
+      </div>
+      <div class="form-group">
+        <label for="txtPassword">Password</label>
+        <input
+          type="password"
+          name="password"
+          id="txtConfirm"
+          class="form-control"
+        />
+      </div>
+      <div class="form-group">
+        <label for="txtConfirm">Confirm</label>
+        <input
+          type="password"
+          name="confirm"
+          id="txtConfirm"
+          class="form-control"
+        />
+      </div>
+      <div class="form-group">
+        <label for="txtName">Name</label>
+        <input type="text" name="name" id="txtName" class="form-control" />
+      </div>
+      <div class="form-group">
+        <label for="txtEmail">Email</label>
+        <input type="email" name="email" id="txtEmail" class="form-control" />
+      </div>
+      <div class="form-group">
+        <label for="txtDOB">Date of birth</label>
+        <input type="text" name="dob" id="txtDOB" class="form-control" />
+      </div>
+      <button type="submit" class="btn btn-outline-success">
+        <i class="fa fa-check" aria-hidden="true"></i>
+        Register
+      </button>
+    </form>
+  </div>
+
+</div>
