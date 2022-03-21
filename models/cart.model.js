@@ -27,14 +27,5 @@ module.exports = {
                 return;
             }
     },
-    get_amount: async ( cart ) =>
-    {
-        let total_amount = 0;
-        for ( ci of cart )
-        {
-            const product = await product_model.singleByID(ci.id);
-            total_amount += product.Price * ci.quantity;
-        }
-        return total_amount;
-    }
+
 };

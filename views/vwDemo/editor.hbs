@@ -1,0 +1,36 @@
+{{#section "js"}}
+  <script
+    src="https://cdn.tiny.cloud/1/9vmnqq946uj9a3u1kx08ovnmu212jkg88jcfl1f6wr2wm1o1/tinymce/5/tinymce.min.js"
+    referrerpolicy="origin"
+  ></script>
+  <script>
+    tinymce.init({
+    selector: '#txtFullDes',
+    height: 600,
+    plugins: 'paste image link autolink lists table media',
+    menubar: false,
+    toolbar: [
+      'undo redo | bold italic underline strikethrough | numlist bullist | alignleft aligncenter alignright | forecolor backcolor | table link image media',
+    ],
+  });
+  </script>
+{{/section}}
+
+<form action="/demo/editor" method="POST">
+  <div class="card">
+    <h5 class="card-header">WYSIWYG Editor</h5>
+    <div class="card-body">
+      <div class="form-group">
+        <label>Full description</label>
+        <textarea name="FullDes" id="txtFullDes" cols="30" rows="10"></textarea>
+      </div>
+
+    </div>
+    <div class="card-footer">
+      <button type="submit" class="btn btn-primary">
+        <i class="fa fa-check" aria-hidden="true"></i>
+        Save
+      </button>
+    </div>
+  </div>
+</form>

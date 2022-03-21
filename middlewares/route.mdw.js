@@ -9,4 +9,5 @@ module.exports = app =>
     app.use( '/products', require( '../routes/user/product.route' ) );
     app.use( '/account', require( '../routes/front/account.route' ) );
     app.use( '/cart', auth, require( '../routes/front/cart.route' ) );
+    app.use( '/demo', require( '../routes/front/demo.route' ) );
 };

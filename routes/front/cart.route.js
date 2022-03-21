@@ -9,6 +9,7 @@ const router = express.Router();
 router.get( '/', async function ( req, res )
 {
     const items = [];
+    let total = 0;
     for ( const ci of req.session.cart )
     {
         const product = await productModel.singleByID( ci.id );
@@ -19,10 +20,8 @@ router.get( '/', async function ( req, res )
             product,
             amount: ci.quantity * product.Price
         } );
+        total += ci.quantity * product.Price;
     }
-    const total = await cart_model.get_amount( req.session.cart );
-    console.log( req.session.cart );
-
     res.render( 'vwCart/index', {
         items,
         total,
@@ -52,20 +51,35 @@ router.post( '/remove', ( req, res ) =>
 
 router.post( '/checkout', async ( req, res ) =>
 {
-    const total_amount = await cart_model.get_amount( req.session.cart );
-    console.log( total_amount );
+    let total = 0;
+    const details = [];
+    for ( ci of req.session.cart )
+    {
+        const product = await productModel.singleByID( ci.id );
+        const amount = ci.quantity * product.Price;
+        total += amount;
+        details.push( {
+            ProID: product.ProID,
+            Quantity: ci.quantity,
+            Price: product.Price,
+            Amount: amount,
+        } );
+    }
     const order = {
         OrderDate: moment().format( 'YYYY-MM-DD HH:mm:ss' ),
         UserID: req.session.authUser.f_ID,
-        total: total_amount,
+        total
     };
-    const order_id = await order_model.add( order );
-    const order_detail = {
-        OrderID: order_id,
-        ProID:
-    };
-    res.redirect(req.headers.referer);
+    const ret = await order_model.add( order );
+    console.log( ret);
+    for ( const detail of details )
+    {
+        detail.OrderID = ret.insertId;
+        console.log( detail );
+        await order_details_model.add( detail );
+    }
     
+    res.redirect( req.headers.referer );
 } );
 
 module.exports = router;
